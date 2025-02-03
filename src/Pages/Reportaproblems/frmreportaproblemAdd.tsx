@@ -265,32 +265,6 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
-              {/* <textarea className="form-control" id="tReport" value={inputdata.tReport} onChange={(even) => setInputdata({ ...inputdata, tReport: even.target.value })} /> */}
-              {/* <AutoComplete
-                                options={options}
-                                style={{ width: '100%' }}
-                                filterOption={(inputValue: any, option: any) =>
-                                    option!.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                }
-                                
-                            >
-                                <TextArea
-                                    placeholder=""
-                                    className="form-control"
-                                    style={{ height: 50 }}
-                                />
-                            </AutoComplete> */}
-
-              {/* <AutoComplete
-                                style={{ width: '100%' }}
-                                options={options}
-                                placeholder="พิมพ์ปัญหา"
-                                onSelect={(even: any) => setInputdata({ ...inputdata, tReport: even.value })}
-                                filterOption={(inputValue: any, option: any) =>
-                                    option!.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                }
-                            /> */}
-
               <Autocomplete
                 id="Personlend"
                 freeSolo
