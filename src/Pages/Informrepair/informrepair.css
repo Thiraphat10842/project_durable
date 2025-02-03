@@ -1,0 +1,5 @@
+.custom-mdb-table .dataTables_length label {
+    margin-left: 22px !important; /* ขยับ label ไปทางขวา 50px */
+    color: rgb(92, 92, 70); 
+  }
+  

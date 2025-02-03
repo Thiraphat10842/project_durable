@@ -1,0 +1,42 @@
+.card-title{
+    font-size: 18px;
+    color: rgb(56, 70, 97);
+}
+
+.btn-danger {
+  background-color: #bd4327; /* กำหนดสีพื้นหลังใหม่ (สีแดงส้ม) */
+  color: white; /* สีข้อความ */
+  border-color: #bd4327; /* สีขอบของปุ่ม */
+  font-size: 13px;
+}
+.btn-default {
+    background-color: #265973; /* กำหนดสีพื้นหลังใหม่ (สีแดงส้ม) */
+    color: white; /* สีข้อความ */
+    border-color: #265973; /* สีขอบของปุ่ม */
+    font-size: 13px;
+}
+
+/* ระยะห่างปกติ */
+button {
+    margin-right: 10px;
+  }
+  @media (max-width: 576px) {
+    button {
+      margin-right: 5px;
+    }
+  }
+
+  .btn-custom-blue {
+    background-color: #265973; 
+    color: white;
+}
+
+.btn-custom-blue:hover {
+    background-color: #397999; 
+}
+
+/* เพิ่ม CSS สำหรับตำแหน่ง */
+.custom-mdb-table .dataTables_length label {
+  margin-left: 22px !important; /* ขยับ label ไปทางขวา 50px */
+  color: rgb(92, 92, 70); 
+}

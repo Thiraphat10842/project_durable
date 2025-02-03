@@ -1,0 +1,129 @@
+.card-title{
+    font-size: 18px;
+    color: rgb(56, 70, 97);
+}
+
+.btn-delete{
+    background-color: #bd4327; /* กำหนดสีพื้นหลังใหม่ (สีแดงส้ม) */
+    color: white; /* สีข้อความ */
+    border-color: #bd4327; /* สีขอบของปุ่ม */
+    font-size: 13px;
+  }
+  .btn-edit {
+      background-color: #265973; /* กำหนดสีพื้นหลังใหม่ (สีแดงส้ม) */
+      color: white; /* สีข้อความ */
+      border-color: #265973; /* สีขอบของปุ่ม */
+      font-size: 13px;
+  }
+.btn-info {
+    background-color:#265973 ;
+    color: white;
+    font-size: 14px;
+    border-color: #265973;
+}
+/* ระยะห่างปกติ */
+button {
+    margin-right: 10px;
+  }
+  
+  /* สำหรับหน้าจอขนาดเล็ก (มือถือ) */
+  @media (max-width: 576px) {
+    button {
+      margin-right: 5px;
+    }
+  }
+
+  .btn-custom-blue {
+    background-color: #265973; /* blue color */
+    color: white;
+}
+
+
+/* ปรับสไตล์ checkbox */
+
+/* ซ่อน checkbox ดั้งเดิม */
+.custom-control-input {
+  display: none; 
+}
+
+/* ปรับสไตล์ label */
+.custom-control-label {
+  position: relative;
+  padding-left: 35px; /* เพิ่มพื้นที่ด้านซ้ายเพื่อรองรับกล่อง */
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+/* สร้างกล่อง checkbox ใหม่ */
+.custom-control-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* การเปลี่ยนแปลงที่ราบรื่น */
+}
+
+/* เมื่อ checkbox ถูกเลือก */
+.custom-control-input:checked + .custom-control-label::before {
+  background-color: #4caf50; /* เปลี่ยนสีพื้นหลังเมื่อเลือก */
+  border-color: #4caf50;
+}
+
+/* เครื่องหมายถูกอยู่ตรงกลาง */
+.custom-control-input:checked + .custom-control-label::after {
+  content: '';
+  position: absolute;
+  left: 7px; /* กำหนดให้เครื่องหมายถูกเริ่มจากซ้าย */
+  top: 5px;  /* กำหนดให้เครื่องหมายถูกเริ่มจากบน */
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg); /* หมุนเครื่องหมายถูก */
+}
+
+/* เมื่อ hover */
+.custom-control-label:hover::before {
+  border-color: #4caf50;
+}
+
+/* เพิ่ม space ระหว่าง checkbox และ label */
+.custom-control-label {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.card-body .card-title {
+  color: rgb(54, 54, 53);
+   
+ }
+ 
+
+/* เพิ่ม CSS สำหรับตำแหน่ง */
+.custom-mdb-table .dataTables_length label {
+  margin-left: 22px !important; /* ขยับ label ไปทางขวา 50px */
+  color: rgb(92, 92, 70); 
+}
+
+
+/* กำหนดสีพื้นหลังของแถวที่ 1 และแถวอื่นๆ */
+.custom-mdb-table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa; /* สีพื้นหลังของแถวที่เป็นเลขคี่ (odd) */
+}
+
+/* กำหนดสีพื้นหลังของแถวที่ 2 และแถวอื่นๆ */
+.custom-mdb-table tbody tr:nth-child(even) {
+  background-color: #e2e5e6; /* สีพื้นหลังของแถวที่เป็นเลขคู่ (even) */
+}
+
+/* เมื่อ hover มาที่แถว */
+.custom-mdb-table tbody tr:hover {
+  background-color: #e2e6ea; /* สีพื้นหลังเมื่อ hover */
+}
+

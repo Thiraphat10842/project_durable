@@ -1,0 +1,16 @@
+
+.left-sidebar {
+  background-color: #10181D; 
+}
+
+.btn-cyan {
+  background-color: #265973;  /* สีพื้นหลังของปุ่ม */
+  color: white;  /* สีข้อความในปุ่ม */
+  border-color: white;
+}
+/* เปลี่ยนสีเมื่อวางเมาส์ (hover) */
+.btn-cyan:hover {
+  background-color: #0e6b4c;  /* สีพื้นหลังเมื่อ hover */
+  color: white;  /* สีข้อความเมื่อ hover */
+}
+

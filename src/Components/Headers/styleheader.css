@@ -1,0 +1,63 @@
+
+/* กำหนดตำแหน่งของ header ให้คงที่ */
+.topbar {
+  position: fixed; /* ทำให้ header คงที่ */
+  top: 0;          /* ให้ header อยู่ที่ด้านบนสุด */
+  left: 0;         /* ให้ header อยู่ที่ด้านซ้ายสุด */
+  width: 100%;     /* กำหนดความกว้างเต็มหน้าจอ */
+  z-index: 1000;   /* ให้ header อยู่เหนือเนื้อหาทั้งหมด */
+  background-color: #333; /* สีพื้นหลังของ header */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เงาให้ header */
+}
+
+/* ให้เนื้อหาของหน้า (body) มีการยืดช่องว่างให้ไม่ไปทับ header */
+body {
+  padding-top: 60px; /* ความสูงของ header ที่จะไม่ให้เนื้อหาทับ */
+}
+
+.light-logo{
+    width: 50px;
+    margin-left: 0;
+}
+
+.navbar-brand{
+    float: left;
+}
+
+.navbar-header{
+    background-color: #265973;
+}
+.navbar-collapse {
+    background-color: #265973; /* เปลี่ยนเป็นสีที่ต้องการ */
+  }
+
+.nav-toggler i {
+    font-size: 32px; /* ปรับขนาดไอคอนเป็น 32px */
+}
+
+@media (max-width: 768px) {
+    .nav-toggler i {
+      font-size: 23px; /* ปรับขนาดให้เล็กลงในหน้าจอมือถือ */
+    }
+  }
+
+  d-none.d-md-block {
+    font-size: 20px; /* ขนาดฟอนต์ของข้อความ */
+  }
+
+/* .user-name {
+  color: wheat;
+  margin-top: 23px;
+} */
+.user-name {
+  display: flex;
+  justify-content: center; /* จัดกลางในแนวนอน */
+  align-items: center;     /* จัดกลางในแนวตั้ง */
+  color: rgba(253, 249, 249, 0.897); 
+  font-size: 18px;
+}
+.dropdown-item{
+  font-size: 16px;
+}
+
+
