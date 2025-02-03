@@ -262,23 +262,6 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
               />
             </div>
         </div>
-          {/* <div className="col-md-12 col-sm-12">
-                        <div className="form-group">
-                            <label>รายงาน</label>
-                            <Select
-                                value={listoptions.find((obj: any) => obj.value === inputdata.tReportID)}
-                                options={listoptions}
-                                styles={customStyles}
-                                onChange={(even: any) => setInputdata({ ...inputdata, tReportID: even?.value, tWorkgroup: even?.label })}
-                            />
-                            <div className="col-md-6 col-sm-12">
-                                <div className="form-group">
-                                    <label>กรอกรายละเอียดเพิ่มเติม</label>
-                                    <input type="text" className="form-control" id="tReport" value={inputdata.tReport} onChange={(even) => setInputdata({ ...inputdata, tReport: even.target.value })} />
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
