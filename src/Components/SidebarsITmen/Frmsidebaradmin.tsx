@@ -153,7 +153,7 @@ const FrmsidebarITmen: FC = () => {
                 </li>
               </ul>
             </li>
-            <li className="sidebar-item p-3">
+            {/* <li className="sidebar-item p-3">
               <a href="https://github.com/wrappixel/matrix-admin-bt5" className="w-100 btn btn-cyan d-flex align-items-center text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
                   <g fill="none">
@@ -163,7 +163,7 @@ const FrmsidebarITmen: FC = () => {
                 </svg>
                 &nbsp; DownloadFree
               </a>
-            </li>
+            </li> */}
 
           </ul>
         </nav>
