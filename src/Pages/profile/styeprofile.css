@@ -1,0 +1,99 @@
+/* เพิ่มความสวยงามให้กับส่วนของการแสดงผลข้อมูล */
+.list-group-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* เมื่อ hover ที่รายการ */
+.list-group-item:hover {
+    background-color: #e9ecef;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* สไตล์ชื่อผู้ใช้งาน */
+.list-group-item h6 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    color: #265e99;
+    margin-top: 10px;
+}
+
+/* สไตล์ตำแหน่งและหน่วยงาน */
+.list-group-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* สไตล์ปุ่ม Edit */
+.list-group-item button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item button:hover {
+    background-color: #218838;
+}
+
+/* สไตล์ card ในส่วนของข้อมูลโปรไฟล์ */
+.card {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* เพิ่มความสวยงามให้กับหัวข้อ card */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ปรับแต่ง Modal */
+.ant-modal {
+    border-radius: 10px;
+}
+
+.ant-modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.ant-modal-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ปรับปุ่มใน Modal */
+.ant-btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.ant-btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.profile-image{
+    margin-top: 10px;
+}
+
+
