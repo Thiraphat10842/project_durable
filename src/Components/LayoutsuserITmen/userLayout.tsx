@@ -2,14 +2,14 @@ import { FC, useState } from "react";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import { Content } from "antd/es/layout/layout";
-import Headeropd from "../Headers/Frmheader";
+import Headeritmen from "../HeadersItmen/Frmheaderitmen";
 import SidebarITmen from "../SidebarsITmen/Frmsidebaradmin";
 import Footers from "../Footers/Frmfooter";
 
 const ITmenLayout: FC = () => {
     return (
         <Layout>
-            <Headeropd />
+            <Headeritmen />
             <SidebarITmen />
             <div className="page-wrapper">
                 <Content>
