@@ -265,7 +265,7 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
                     </div>
 
                     {/* ใช้ Select แทน Checkbox */}
-                    {/* <div className="col-md-12 col-sm-12">
+                    <div className="col-md-12 col-sm-12">
                         <div className="form-group">
                             <label>สถานะ</label>
                             <Select
@@ -275,7 +275,7 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
                                 styles={customStyles}
                             />
                         </div>
-                    </div> */}
+                    </div>
 
                 </div>
 
