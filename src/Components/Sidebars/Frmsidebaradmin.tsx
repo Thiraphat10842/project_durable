@@ -82,10 +82,10 @@ const Frmsidebaradmin: FC = () => {
                   <a href="/Admin/Reportaproblem" className="sidebar-link">
                     <span className="hide-menu">&nbsp; - แจ้งปัญหา </span></a>
                 </li>
-                <li className="sidebar-item">
+                {/* <li className="sidebar-item">
                   <a href="/Admin/Labour" className="sidebar-link">
                     <span className="hide-menu"> &nbsp;  - ภาระงาน </span></a>
-                </li>
+                </li> */}
                 <li className="sidebar-item">
                   <a href="/Admin/Jobdescription" className="sidebar-link">
                     <span className="hide-menu"> &nbsp; - Job description </span></a>
