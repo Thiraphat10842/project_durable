@@ -2,14 +2,14 @@ import { FC, useState } from "react";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import { Content } from "antd/es/layout/layout";
-import Headeropd from "../Headers/Frmheader";
+import Headeruser from "../Headersuser/Frmheaderuser";
 import Sidebaropd from "../Sidebarsuser/Frmsidebaruser";
 import Footers from "../Footers/Frmfooter";
 
 const userLayout: FC = () => {
     return (
         <Layout>
-            <Headeropd />
+            <Headeruser />
             <Sidebaropd />
             <div className="page-wrapper">
                 <Content>
