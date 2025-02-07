@@ -57,6 +57,7 @@ const FrmusersITmen: FC = () => {
                     fullName: (
                         <>{row.Tname}{row.Fname} {row.Lname}</>
                     ),
+                    Str: row.Str === "1" ? "Admin" : row.Str === "2" ? "ITmen" : "User",
                     Edit: (
                         <>
                             <button className="btn btn-default btn-xs m-r-5" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-original-title="Edit" onClick={() => (Showdetail(row.ID), setOpen(true))} ><i className="me-2 mdi mdi-pencil" />แก้ไข</button>

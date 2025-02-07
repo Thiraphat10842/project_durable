@@ -6,8 +6,8 @@ import API from '../../Configs/config';
 import Register from './Frmregister';
 import { toast } from "react-toastify";
 import './styeluser.css'
-const Frmusers: FC = () => {
 
+const Frmusers: FC = () => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [datasource, setDatasource] = useState([] as any);
@@ -24,7 +24,6 @@ const Frmusers: FC = () => {
         setTimeout(() => {
             setLoading(false);
             setCountS(countS + 1);
-            //setOpen(false);
         }, 3000);
     };
 
@@ -34,36 +33,36 @@ const Frmusers: FC = () => {
     };
 
     useEffect(() => {
-
         Showdatauser();
-
     }, [])
 
-
     async function Showdatauser() {
-        let userID: String = "";
-        if (sessionStorage.getItem('sessStr') != "1") {
+        let userID: string = "";
+        if (sessionStorage.getItem('sessStr') !== "1") {
             userID = sessionStorage.getItem('sessName') || '';
         }
 
         axios.get(API.returnURL.url + "Personnel?userID=" + userID)
             .then(function (response) {
-
-                //console.log(response.data);
                 let Mydata = response.data;
                 let { rows } = response.data;
+
                 rows = Mydata.map((row: any, key: number) => ({
                     ...row,
                     fullName: (
                         <>{row.Tname}{row.Fname} {row.Lname}</>
                     ),
+                    Str: row.Str === "1" ? "Admin" : row.Str === "2" ? "ITmen" : "User",
                     Edit: (
                         <>
-                            <button className="btn btn-default btn-xs m-r-5" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-original-title="Edit" onClick={() => (Showdetail(row.ID), setOpen(true))} ><i className="me-2 mdi mdi-pencil" />แก้ไข</button>
-                            <button className="btn btn-danger btn-xs m-r-5" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-original-title="Delete" onClick={() => DeleteOffice(row.ID)} ><i className="me-2 mdi mdi-delete-forever" />ลบ</button>
+                            <button className="btn btn-default btn-xs m-r-5" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-original-title="Edit" onClick={() => (Showdetail(row.ID), setOpen(true))} >
+                                <i className="me-2 mdi mdi-pencil" />แก้ไข
+                            </button>
+                            <button className="btn btn-danger btn-xs m-r-5" style={{ cursor: 'pointer' }} data-toggle="tooltip" data-original-title="Delete" onClick={() => DeleteOffice(row.ID)} >
+                                <i className="me-2 mdi mdi-delete-forever" />ลบ
+                            </button>
                         </>
                     ),
-
                 }));
 
                 Mydata = {
@@ -115,26 +114,19 @@ const Frmusers: FC = () => {
                 };
 
                 setDatasource(Mydata);
-
             });
-
     }
 
     async function Showdetail(userID: any) {
-
         axios.get(API.returnURL.url + "Personnel?userID=" + userID)
             .then(function (response) {
-
                 setDatadetail(response.data);
-
             });
-
     }
 
     async function DeleteOffice(ID: string) {
-        var confirm = window.confirm("คุณต้องการลบหน่วยงานนี้หรือไม่ ?")
-        if (confirm == true) {
-
+        var confirmDelete = window.confirm("คุณต้องการลบหน่วยงานนี้หรือไม่ ?");
+        if (confirmDelete) {
             axios.delete(API.returnURL.url + "Personnel?ID=" + ID, {
                 headers: {
                     "Content-Type": 'application/json'
@@ -144,13 +136,9 @@ const Frmusers: FC = () => {
                 Showdatauser();
             }).catch(error => {
                 console.error("Error deleting Hardware", error)
-            })
-
-
-
+            });
         }
     }
-
 
     return (
         <div style={{ top: 0 }}>
@@ -172,7 +160,6 @@ const Frmusers: FC = () => {
             </div>
 
             <div className="container-fluid">
-
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
@@ -193,13 +180,11 @@ const Frmusers: FC = () => {
                                 infoLabel={["จำนวน", "ถึง", "จากทั้งหมด", "รายการ"]}
                                 paginationLabel={["หน้าก่อน", "ถัดไป"]}
                                 entriesLabel="แสดงจำนวนรายการ"
-                                className="custom-mdb-table" 
+                                className="custom-mdb-table"
                             />
-
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <Modal
@@ -208,23 +193,12 @@ const Frmusers: FC = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 width={'50%'}
-                footer={[
-                    // <Button key="back" onClick={handleCancel}>
-                    //     ยกเลิก
-                    // </Button>,
-                    // <Button key="submit" type="primary" loading={loading} onClick={handleOk}  className="btn btn-custom-blue" >
-                    //     บันทึก
-                    // </Button>,
-                ]}
+                footer={[]}
             >
-
                 <Register datadetail={datadetail} countS={countS} />
-
             </Modal>
-
         </div>
-
     )
 }
 
-export default Frmusers
+export default Frmusers;

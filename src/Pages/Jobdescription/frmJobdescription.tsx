@@ -105,12 +105,12 @@ function frmJobdescription() {
 
         Mydata = {
           columns: [
-            {
-              label: "ID",
-              field: "ID",
-              sort: "asc",
-              width: 100,
-            },
+            // {
+            //   label: "ID",
+            //   field: "ID",
+            //   sort: "asc",
+            //   width: 100,
+            // },
             {
               label: "ชื่อผู้แจ้ง",
               field: "userinFormer",
