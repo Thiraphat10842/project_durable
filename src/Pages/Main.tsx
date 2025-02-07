@@ -60,7 +60,8 @@ const Main: FC = () => {
           <Route path="/User/Informrepairuser" element={<Informrepairuser/>} />
           <Route path="/User/Reportaproblemuser" element={<Reportaproblemuser/>} />
           <Route path='/User/Lendinguser' element={<Lendinguser/>} />
-          <Route path='/User/Returnequipmentuser' element={<Returnequipmentuser/>} />        
+          <Route path='/User/Returnequipmentuser' element={<Returnequipmentuser/>} />   
+          <Route path='/User/FrmProfile' element={<FrmProfile/>} />     
         </Route>
         <Route path="/ITmen" element={<ITmenLayout/>}>
           <Route path="/ITmen" element={<HomeITmen/>} />
@@ -73,6 +74,7 @@ const Main: FC = () => {
           <Route path="/ITmen/ReportaproblemITmen" element={<ReportaproblemITmen />} />
           <Route path="/ITmen/InformrepairITmen" element={<InformrepairITmen />} />
           <Route path="/ITmen/JobdescriptionITmen" element={<JobdescriptionITmen/>} />
+          <Route path='/ITmen/FrmProfile' element={<FrmProfile/>} /> 
         </Route>
         {/* <Route path='/not_found' element={<PathNotFound />} />*/}
         <Route path='*' element={<Notfoundredirect />} /> 
