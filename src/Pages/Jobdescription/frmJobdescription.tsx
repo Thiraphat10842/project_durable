@@ -133,13 +133,26 @@ function frmJobdescription() {
               label: "Jobdescription",
               field: "symptom",
               sort: "asc",
-              width: 200,
+              width: 150,
             },
             {
               label: "รายละเอียดเพิ่มเติม",
               field: "Other",
               sort: "asc",
-              width: 250,
+              width: 150,
+            },
+            {
+              label: "ผู้รับแจ้ง",
+              field: "fullName1",
+              sort: "asc",
+              width: 200,
+            },
+            
+            {
+              label: "ผู้รับงาน",
+              field: "fullName2",
+              sort: "asc",
+              width: 200,
             },
             {
               label: "",

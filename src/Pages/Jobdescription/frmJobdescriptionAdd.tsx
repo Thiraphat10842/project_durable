@@ -398,7 +398,7 @@ const frmJobdescriptionAdd: FC<userProps> = ({
         <div className="row">
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>ผู้รับงาน(userreceiveinForm)</label>
+              <label>ผู้รับแจ้ง</label>
               <Select
                 value={listpersonnelit.find(
                   (obj: any) => obj.value === inputdata.fullName1
@@ -414,6 +414,23 @@ const frmJobdescriptionAdd: FC<userProps> = ({
                 }
               />
             </div>
+            <div className="form-group">
+                <label>ผู้รับงาน</label>
+                <Select
+                  value={listpersonnelit.find(
+                    (obj: any) => obj.value === inputdata.fullName2
+                  )}
+                  options={listpersonnelit}
+                  styles={customStyles}
+                  onChange={(even: any) =>
+                    setInputdata({
+                      ...inputdata,
+                      userreceiveJob: even?.value,
+                      fullName2: even?.label,
+                    })
+                  }
+                />
+              </div> 
           </div>
         </div>
       </form>

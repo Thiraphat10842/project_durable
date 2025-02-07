@@ -51,6 +51,7 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
   const [Lend, setLend] = useState([]);
   const [listoffice, setlistOffice] = useState([]);
   const [listpersonnelit, setlistPersonnelit] = useState([]);
+  const [strhidden, setStrhidden] = useState(false);
 
   const customStyles = {
     control: (provided: any, state: any) => ({
@@ -150,6 +151,13 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
       Officename: sessionStorage.getItem("sesssOfficename") || "",
     });
 
+    
+    if (sessionStorage.getItem("sessStr") == "1") {
+      setStrhidden(false);
+    } else {
+      setStrhidden(true);
+    }
+    
     Showlistpersonnelit();
     Showlistoffice();
     ShowlistReturn();
@@ -398,7 +406,7 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
         <div className="row">
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>ผู้รับงาน(userreceiveinForm)</label>
+              <label>ผู้รับแจ้ง</label>
               <Select
                 value={listpersonnelit.find(
                   (obj: any) => obj.value === inputdata.fullName1
