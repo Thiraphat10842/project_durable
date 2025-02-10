@@ -249,7 +249,7 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
       <form>
         <div className="row">
         <div className="col-md-12 col-sm-12">
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>ชื่อผู้แจ้ง</label>
               <input
                 type="text"
@@ -260,7 +260,7 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
                   setInputdata({ ...inputdata, tuserName: even.target.value })
                 }
               />
-            </div>
+            </div> */}
         </div>
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
