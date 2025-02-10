@@ -256,7 +256,7 @@ return (
 
   <Modal
     open={open}
-    title={formType === "add" ? "จัดการ Jobdescription" : "แก้ไข"}
+    title={formType === "add" ? "จัดการ Jobdescription (สำหรับรายงานภาระงานที่ได้รับมอบหมาย)" : "แก้ไข"}
     onOk={handleOk}
     onCancel={handleCancel}
     width={"60%"}
