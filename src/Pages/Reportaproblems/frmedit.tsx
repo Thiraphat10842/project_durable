@@ -145,7 +145,35 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
                 setlistOptions(response.data);
             });
     }
-
+    
+    async function sendLineNotification(message: string, status: string) {
+        let lineTokenID = sessionStorage.getItem("sessLineTokenID") || "EcmHM9WUtcAqL71yjsD4u8gPFnZc4lS5cmSTKhfygh9"; // 🔹 ใช้ค่า Default ถ้าไม่มี  
+    
+        if (!lineTokenID) {
+            toast.error("ไม่พบ Line Token ID");
+            return;
+        }
+        try {
+            const response = await axios.get(`${API.returnURL.url}Sendline/Sendline`, {
+                params: {
+                    lineTokenID: lineTokenID,
+                    messages: message,
+                    floc: "" // ถ้าไม่มีรูปภาพให้ส่งค่าว่าง
+                }
+            });
+    
+            if (response.status === 200) {
+                toast.success("ส่งข้อความแจ้งเตือนไปยัง LINE สำเร็จ!");
+            } else {
+                toast.error("ไม่สามารถส่งข้อความแจ้งเตือนได้");
+            }
+        } catch (error) {
+            console.error("Error sending LINE Notify:", error);
+            toast.error("เกิดข้อผิดพลาดในการส่งข้อความ LINE");
+        }
+    }
+    
+    
     async function Savedata() {
         // if (inputdata.tReport == "") {
         //     toast.error("กรุณาแจ้งเรื่องที่ต้องการแจ้งด้วยครับ!");
@@ -171,17 +199,28 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
             frmdata.append("userStr", inputdata.tUserstr);
             frmdata.append("userID", inputdata.tPersonnelid);
             frmdata.append("status", inputdata.tStatus);
+            // ✅ แปลงค่า Status เป็นข้อความ  
+        const statusLabels: Record<string, string> = {
+            "0": "แจ้งปัญหา",
+            "1": "รับแจ้งแล้ว",
+            "2": "สั่งงานแล้ว",
+            "3": "ดำเนินการเสร็จแล้ว",
+        };
+        const statusText = statusLabels[inputdata.tStatus] || "ไม่ทราบสถานะ";
     
             // หากสถานะเป็น 'ดำเนินการเสร็จแล้ว' ต้องไม่ลบข้อมูล แต่เพียงอัปเดตสถานะ
             axios.post(API.returnURL.url + "Reportproblem", frmdata)
                 .then((response) => {
                     if (response.data == "0") {
                         toast.success("ระบบทำการบันทึกข้อมูลการลงทะเบียนเรียบร้อยแล้วครับ");
+                        // ✅ ส่งแจ้งเตือน LINE พร้อมข้อความสถานะ  
+                    sendLineNotification(`\n ใบงานงานที่: ${inputdata.tID}\n 📢 เรื่องที่แจ้ง: ${inputdata.tReport}\n📌 เจ้าหน้าที่ได้${statusText}`, inputdata.tStatus);
                     } else if (response.data == "1") {
                         toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
                         document.getElementById("tUsername")?.focus();
                     } else {
                         toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
+                        sendLineNotification(`\n ใบงานงานที่: ${inputdata.tID}\n 📢 เรื่องที่แจ้ง: ${inputdata.tReport}\n📌 เจ้าหน้าที่ได้${statusText}`, inputdata.tStatus);
                         setTimeout(() => {
                             Cleartext();
                             window.location.reload(); 
@@ -193,14 +232,11 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
                     console.log(error);
                 });
         }
-    }
-    
+    } 
     async function Cleartext() {
         setInputdata(txtInput);
     }
-
     const datenow = new Date().toISOString().split("T")[0];
-
     return (
         <div>
             <form>
