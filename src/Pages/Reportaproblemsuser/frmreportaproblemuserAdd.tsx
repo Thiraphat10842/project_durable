@@ -242,52 +242,9 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
     <div>
       <form>
         <div className="row">
-          {/* <div className="col-md-12 col-sm-12">
-                        <div className="form-group">
-                            <label>รายงาน</label>
-                            <Select
-                                value={listoptions.find((obj: any) => obj.value === inputdata.tReportID)}
-                                options={listoptions}
-                                styles={customStyles}
-                                onChange={(even: any) => setInputdata({ ...inputdata, tReportID: even?.value, tWorkgroup: even?.label })}
-                            />
-                            <div className="col-md-6 col-sm-12">
-                                <div className="form-group">
-                                    <label>กรอกรายละเอียดเพิ่มเติม</label>
-                                    <input type="text" className="form-control" id="tReport" value={inputdata.tReport} onChange={(even) => setInputdata({ ...inputdata, tReport: even.target.value })} />
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
-              {/* <textarea className="form-control" id="tReport" value={inputdata.tReport} onChange={(even) => setInputdata({ ...inputdata, tReport: even.target.value })} /> */}
-              {/* <AutoComplete
-                                options={options}
-                                style={{ width: '100%' }}
-                                filterOption={(inputValue: any, option: any) =>
-                                    option!.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                }
-                                
-                            >
-                                <TextArea
-                                    placeholder=""
-                                    className="form-control"
-                                    style={{ height: 50 }}
-                                />
-                            </AutoComplete> */}
-
-              {/* <AutoComplete
-                                style={{ width: '100%' }}
-                                options={options}
-                                placeholder="พิมพ์ปัญหา"
-                                onSelect={(even: any) => setInputdata({ ...inputdata, tReport: even.value })}
-                                filterOption={(inputValue: any, option: any) =>
-                                    option!.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                }
-                            /> */}
-
               <Autocomplete
                 id="Personlend"
                 freeSolo
@@ -389,15 +346,6 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
               />
             </div>
           </div>
-          {/* <div className="col-md-12 col-sm-12" hidden={strhidden}>
-                        <div className="form-group">
-                            <label>สถานะ</label>
-                            <div className="custom-control custom-checkbox mb-5">
-                                <input type="checkbox" className="custom-control-input" id="tStatus" onClick={(even: any) => Selectstr(even.target.checked)} />
-                                <label className="custom-control-label" htmlFor="tStatus"> &nbsp;  รับแจ้ง</label>
-                            </div>
-                        </div>
-                    </div> */}
         </div>
       </form>
 
