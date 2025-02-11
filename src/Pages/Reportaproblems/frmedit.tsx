@@ -155,7 +155,7 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
         }
         console.log("📌 ข้อมูลที่ส่ง:", { personnelID, message });
         try {
-            const response = await axios.post(API.returnURL.url+`Sendline/sendNotification`, {
+            const response = await axios.post(API.returnURL.url+"Sendline/SendToPersonnel", {
                 personnelID: personnelID,
                 message: message
             });
