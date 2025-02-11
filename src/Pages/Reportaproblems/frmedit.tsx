@@ -146,20 +146,18 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
             });
     }
     
-    async function sendLineNotification(message: string, status: string) {
-        let lineTokenID = sessionStorage.getItem("sessLineTokenID") || "EcmHM9WUtcAqL71yjsD4u8gPFnZc4lS5cmSTKhfygh9"; // 🔹 ใช้ค่า Default ถ้าไม่มี  
+    async function sendLineNotification(message: string) {
+        let personnelID = sessionStorage.getItem("sessuserID") || "";
     
-        if (!lineTokenID) {
-            toast.error("ไม่พบ Line Token ID");
+        if (!personnelID) {
+            toast.error("ไม่พบ Personnel ID");
             return;
         }
+        console.log("📌 ข้อมูลที่ส่ง:", { personnelID, message });
         try {
-            const response = await axios.get(`${API.returnURL.url}Sendline/Sendline`, {
-                params: {
-                    lineTokenID: lineTokenID,
-                    messages: message,
-                    floc: "" // ถ้าไม่มีรูปภาพให้ส่งค่าว่าง
-                }
+            const response = await axios.post(API.returnURL.url+`Sendline/sendNotification`, {
+                personnelID: personnelID,
+                message: message
             });
     
             if (response.status === 200) {
@@ -175,31 +173,35 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
     
     
     async function Savedata() {
-        // if (inputdata.tReport == "") {
-        //     toast.error("กรุณาแจ้งเรื่องที่ต้องการแจ้งด้วยครับ!");
-        //     document.getElementById("tReport")?.focus();
-        //     return false;} else 
-        if (inputdata.tofficeID == "") {
+        if (!inputdata.tReport) {
+            toast.error("กรุณาแจ้งเรื่องที่ต้องการแจ้งด้วยครับ!");
+            document.getElementById("tReport")?.focus();
+            return;
+        }
+        if (!inputdata.tofficeID) {
             toast.error("กรุณาเลือกหน่วยงานด้วยครับ!");
-            return false;
-        } else if (inputdata.tTel == "") {
+            return;
+        }
+        if (!inputdata.tTel) {
             toast.error("กรุณาใส่เบอร์โทรติดต่อด้วยครับ!");
             document.getElementById("tTel")?.focus();
-            return false;
-        } else {
-            const frmdata = new FormData();
-            frmdata.append("id", inputdata.tID);
-            frmdata.append("personnelID", inputdata.tPersonnelid);
-            frmdata.append("officeID", inputdata.tofficeID);
-            frmdata.append("workgroup", inputdata.tWorkgroup);
-            frmdata.append("report", inputdata.tReport);
-            frmdata.append("tel", inputdata.tTel);
-            frmdata.append("email", inputdata.tEmail);
-            frmdata.append("lineID", inputdata.tLineid);
-            frmdata.append("userStr", inputdata.tUserstr);
-            frmdata.append("userID", inputdata.tPersonnelid);
-            frmdata.append("status", inputdata.tStatus);
-            // ✅ แปลงค่า Status เป็นข้อความ  
+            return;
+        }
+    
+        const frmdata = new FormData();
+        frmdata.append("id", inputdata.tID);
+        frmdata.append("personnelID", inputdata.tPersonnelid);
+        frmdata.append("officeID", inputdata.tofficeID);
+        frmdata.append("workgroup", inputdata.tWorkgroup);
+        frmdata.append("report", inputdata.tReport);
+        frmdata.append("tel", inputdata.tTel);
+        frmdata.append("email", inputdata.tEmail);
+        frmdata.append("lineID", inputdata.tLineid);
+        frmdata.append("userStr", inputdata.tUserstr);
+        frmdata.append("userID", inputdata.tPersonnelid);
+        frmdata.append("status", inputdata.tStatus);
+    
+        // ✅ แปลงค่า Status เป็นข้อความ
         const statusLabels: Record<string, string> = {
             "0": "แจ้งปัญหา",
             "1": "รับแจ้งแล้ว",
@@ -208,32 +210,37 @@ const frmreportaproblemAdd: FC<userProps> = ({ datadetail }) => {
         };
         const statusText = statusLabels[inputdata.tStatus] || "ไม่ทราบสถานะ";
     
-            // หากสถานะเป็น 'ดำเนินการเสร็จแล้ว' ต้องไม่ลบข้อมูล แต่เพียงอัปเดตสถานะ
-            axios.post(API.returnURL.url + "Reportproblem", frmdata)
-                .then((response) => {
-                    if (response.data == "0") {
-                        toast.success("ระบบทำการบันทึกข้อมูลการลงทะเบียนเรียบร้อยแล้วครับ");
-                        // ✅ ส่งแจ้งเตือน LINE พร้อมข้อความสถานะ  
-                    sendLineNotification(`\n ใบงานงานที่: ${inputdata.tID}\n 📢 เรื่องที่แจ้ง: ${inputdata.tReport}\n📌 เจ้าหน้าที่ได้${statusText}`, inputdata.tStatus);
-                    } else if (response.data == "1") {
-                        toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
-                        document.getElementById("tUsername")?.focus();
-                    } else {
-                        toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
-                        sendLineNotification(`\n ใบงานงานที่: ${inputdata.tID}\n 📢 เรื่องที่แจ้ง: ${inputdata.tReport}\n📌 เจ้าหน้าที่ได้${statusText}`, inputdata.tStatus);
-                        setTimeout(() => {
-                            Cleartext();
-                            window.location.reload(); 
-                        }, 1300);  
-                    }
-                })
-                .catch((error) => {
-                    toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล Error " + error);
-                    console.log(error);
-                });
+        try {
+            const response = await axios.post(API.returnURL.url+`Reportproblem`, frmdata);
+    
+            if (response.data == "0") {
+                toast.success("ระบบทำการบันทึกข้อมูลการลงทะเบียนเรียบร้อยแล้วครับ");
+    
+                // ✅ ส่งแจ้งเตือน LINE
+                await sendLineNotification(
+                    `📢 ใบงานที่: ${inputdata.tID}\nเรื่องที่แจ้ง: ${inputdata.tReport}\n📌 สถานะ: ${statusText}`
+                );
+            } else if (response.data == "1") {
+                toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
+                document.getElementById("tUsername")?.focus();
+            } else {
+                toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
+    
+                await sendLineNotification(
+                    `📢 ใบงานที่: ${inputdata.tID}\nเรื่องที่แจ้ง: ${inputdata.tReport}\n📌 สถานะ: ${statusText}`
+                );
+    
+                // setTimeout(() => {
+                //     Cleartext();
+                //     window.location.reload();
+                // }, 1300);
+            }
+        } catch (error) {
+            toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + error);
+            console.error(error);
         }
-    } 
-    async function Cleartext() {
+    }
+        async function Cleartext() {
         setInputdata(txtInput);
     }
     const datenow = new Date().toISOString().split("T")[0];
