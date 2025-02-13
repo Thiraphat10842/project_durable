@@ -168,8 +168,31 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
         console.log(response.data);
       });
   }
-  
 
+
+
+  async function sendLineNotification(message: string) {
+    console.log("📌 ข้อมูลที่ส่ง:", { message });
+
+    try {
+      const response = await axios.post(
+        API.returnURL.url + "Sendline/SendToadminandit",
+        {
+          message: message,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("ส่งข้อความแจ้งเตือนไปยัง LINE สำเร็จ!");
+      } else {
+        toast.error("ไม่สามารถส่งข้อความแจ้งเตือนได้");
+      }
+    } catch (error) {
+      console.error("Error sending LINE Notify:", error);
+      toast.error("เกิดข้อผิดพลาดในการส่งข้อความ LINE");
+    }
+  }
+  
   async function Savedata() {
     if (inputdata.tReport == "") {
       toast.error("กรุณาแจ้งเรื่องที่ต้องการแจ้งด้วยครับ!");
@@ -195,29 +218,49 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       frmdata.append("userStr", inputdata.tUserstr);
       frmdata.append("userID", inputdata.tPersonnelid);
       frmdata.append("status", inputdata.tStatus);
-      axios
-        .post(API.returnURL.url + "Reportproblem", frmdata)
-        .then((response) => {
-          //console.log(response);
-          if (response.data == "0") {
-            toast.success("ระบบทำการบันทึกข้อมูลการลงทะเบียนเรียบร้อยแล้วครับ");
-          } else if (response.data == "1") {
-            toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
-            document.getElementById("tUsername")?.focus();
-          } else {
-            toast.success("ระบบทำการบันทึกข้อมูลเรียบร้อย");
-            setTimeout(() => {
-              Cleartext();
-              window.location.reload();
-            }, 1200);
-          }
-        })
-        .catch((error) => {
-          toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล Error " + error);
-          console.log(error);
-        });
+          // ✅ แปลงค่า Status เป็นข้อความ
+    const statusLabels: Record<string, string> = {
+      "0": "แจ้งปัญหา",
+      "1": "รับแจ้งแล้ว",
+      "2": "สั่งงานแล้ว",
+      "3": "ดำเนินการเสร็จแล้ว",
+    };
+    const statusText = statusLabels[inputdata.tStatus] || "ไม่ทราบสถานะ";
+      try {
+        const response = await axios.post(
+          API.returnURL.url + `Reportproblem`,
+          frmdata
+        );
+  
+        if (response.data == "0") {
+          toast.success("ระบบทำการบันทึกข้อมูลการลงทะเบียนเรียบร้อยแล้วครับ");
+  
+          // ✅ ส่งแจ้งเตือน LINE
+          await sendLineNotification(
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n⚠️ สถานะ: ${statusText}`
+          );
+        } else if (response.data == "1") {
+          toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
+          document.getElementById("tUsername")?.focus();
+        } else {
+          toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
+  
+          await sendLineNotification(
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel}\n⚠️ สถานะ: ${statusText}`
+          );
+  
+          setTimeout(() => {
+            Cleartext();
+            window.location.reload();
+          }, 1300);
+        }
+      } catch (error) {
+        toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + error);
+        console.error(error);
+      }
     }
-  }
+    }
+  
 
   async function Selectstr(str: boolean) {
     if (str == true) {
