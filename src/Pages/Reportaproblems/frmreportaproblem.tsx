@@ -94,7 +94,7 @@ const frmreportaproblem: FC = () => {
 
                 Mydata = {
                     columns: [
-                        { label: 'Personnelid', field: 'personnelID', sort: 'asc', width: 100 },
+                        // { label: 'Personnelid', field: 'personnelID', sort: 'asc', width: 100 },
                         // { label: 'ชื่อผู้แจ้ง', field: 'userName', sort: 'asc', width: 200 },
                         { label: 'หน่วยงาน', field: 'Officename', sort: 'asc', width: 200 },
                         { label: 'วันที่', field: 'reportDate', sort: 'asc', width: 150 },
