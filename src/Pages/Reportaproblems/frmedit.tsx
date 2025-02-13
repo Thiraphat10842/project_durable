@@ -250,7 +250,7 @@ const frmreportaproblemedit: FC<userProps> = ({ datadetail }) => {
 
         // ✅ ส่งแจ้งเตือน LINE
         await sendLineNotification(
-          `📢 ใบงานที่: ${inputdata.tID}\nเรื่องที่แจ้ง: ${inputdata.tReport}\n📌 สถานะ: ${statusText}`
+          `\n📢 ใบงานที่: ${inputdata.tID}\n 📋เรื่องที่แจ้ง: ${inputdata.tReport}\n ⚠️ สถานะ: ${statusText}`
         );
       } else if (response.data == "1") {
         toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
@@ -259,7 +259,7 @@ const frmreportaproblemedit: FC<userProps> = ({ datadetail }) => {
         toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
 
         await sendLineNotification(
-          `📢 ใบงานที่: ${inputdata.tID}\nเรื่องที่แจ้ง: ${inputdata.tReport}\n📌 สถานะ: ${statusText}`
+          `\n📢 ใบงานที่: ${inputdata.tID}\n 📋เรื่องที่แจ้ง: ${inputdata.tReport}\n ⚠️ สถานะ: ${statusText}`
         );
 
         setTimeout(() => {
