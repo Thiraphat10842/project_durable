@@ -86,6 +86,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
     tUserstr: "",
     tStatus: "0",
     tpersonnelID: "",
+    tOfficename: "",
   };
 
   const [inputdata, setInputdata] = useState(txtInput);
@@ -149,6 +150,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
       tLineid: datadetail[0].userLineid,
       tStatus: datadetail[0].str,
       tpersonnelID: datadetail[0].personnelID,
+      tOfficename: datadetail[0].Officename,
     });
 
     // checkboxStr.checked = datadetail[0]?.str == '1';
@@ -218,6 +220,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
     frmdata.append("userStr", inputdata.tUserstr);
     frmdata.append("userID", inputdata.tPersonnelid);
     frmdata.append("status", inputdata.tStatus);
+    frmdata.append("Officename", inputdata.tOfficename);
 
     // ✅ แปลงค่า Status เป็นข้อความ
     const statusLabels: Record<string, string> = {
