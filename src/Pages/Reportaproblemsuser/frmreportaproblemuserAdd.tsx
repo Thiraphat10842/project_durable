@@ -260,8 +260,6 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       }
     }
     }
-  
-
   async function Selectstr(str: boolean) {
     if (str == true) {
       setInputdata({ ...inputdata, tStatus: "1" });
