@@ -280,7 +280,7 @@ const frmreportaproblemedit: FC<userProps> = ({ datadetail }) => {
     <div>
       <form>
         <div className="row">
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Personnel ID</label>
             <input
               type="text"
@@ -289,7 +289,7 @@ const frmreportaproblemedit: FC<userProps> = ({ datadetail }) => {
               value={inputdata.tpersonnelID}
               readOnly
             />
-          </div>
+          </div> */}
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
