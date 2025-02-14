@@ -87,6 +87,8 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
     tLineid: "",
     tUserstr: "",
     tStatus: "0",
+    tOfficename: "",
+    tpersonnelID: "",
   };
   const [inputdata, setInputdata] = useState(txtInput);
 
@@ -116,6 +118,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       tUserstr: sessionStorage.getItem("sessStr") || "",
       tPersonnelid: sessionStorage.getItem("sessuserID") || "",
       tPersonnelname: sessionStorage.getItem("sessName") || "",
+      tOfficename: sessionStorage.getItem("sessOfficename") || "",
     });
 
     if (sessionStorage.getItem("sessStr") == "1") {
@@ -144,23 +147,21 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       tOther: datadetail[0].other,
       tLineid: datadetail[0].userLineid,
       tStatus: datadetail[0].str,
+      tpersonnelID: datadetail[0].personnelID,
+      tOfficename: datadetail[0].Officename,
     });
 
-    if (datadetail[0]?.str == "1") {
-      checkboxStr.checked = true;
-    } else {
-      checkboxStr.checked = false;
-    }
+    // checkboxStr.checked = datadetail[0]?.str == '1';
   }
-
   async function Showlistoffice() {
     //const res = await axios.get(API.returnURL.url + "Office");
     axios.get(API.returnURL.url + "Office").then(function (response) {
-      //console.log(response);
+      console.log(response);
       setlistOffice(response.data);
     });
   }
 
+  
   async function Showipaddress() {
     axios
       .get(API.returnURL.url + "Reportproblem/Getipaddress")
@@ -218,6 +219,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       frmdata.append("userStr", inputdata.tUserstr);
       frmdata.append("userID", inputdata.tPersonnelid);
       frmdata.append("status", inputdata.tStatus);
+      frmdata.append("Officename", inputdata.tOfficename);
           // ✅ แปลงค่า Status เป็นข้อความ
     const statusLabels: Record<string, string> = {
       "0": "แจ้งปัญหา",
@@ -237,7 +239,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
   
           // ✅ ส่งแจ้งเตือน LINE
           await sendLineNotification(
-            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n⚠️ สถานะ: ${statusText}`
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️ สถานะ: ${statusText}`
           );
         } else if (response.data == "1") {
           toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
@@ -246,7 +248,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
           toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
   
           await sendLineNotification(
-            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel}\n⚠️ สถานะ: ${statusText}`
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel}\n ⚠️ สถานะ: ${statusText}`
           );
   
           setTimeout(() => {
