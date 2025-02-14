@@ -127,3 +127,7 @@ button {
   background-color: #e2e6ea; /* สีพื้นหลังเมื่อ hover */
 }
 
+
+.alert-text{
+  color: #bd4327;
+}

@@ -278,6 +278,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
+              <p className="alert-text">!! โปรดระบุ IP เครื่องคอมพิวเตอร์ของคุณลงในเรื่องที่แจ้งเพื่อให้ง่ายต่อการทำงานของเจ้าหน้าที่</p>
               <Autocomplete
                 id="Personlend"
                 freeSolo
