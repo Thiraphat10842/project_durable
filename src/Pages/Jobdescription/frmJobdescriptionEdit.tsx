@@ -249,7 +249,7 @@ const frmJobdescriptionEdit: FC<userProps> = ({
                 type="text"
                 className="form-control"
                 id="userinFormer"
-                placeholder="ชื่อผู้แจ้ง"
+                placeholder="ผู้แจ้งข้อมูล"
                 value={inputdata.userinFormer}
                 onChange={(even) =>
                   setInputdata({
@@ -328,12 +328,12 @@ const frmJobdescriptionEdit: FC<userProps> = ({
           </div>
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>วันเริ่มงาน</label>
+              <label>กำหนดวันเริ่มงาน</label>
               <input
                 type="date"
                 className="form-control"
                 id="dateStart"
-                placeholder="วันเริ่มงาน"
+                placeholder="กำหนดวันเริ่มงาน"
                 value={inputdata.dateStart ? inputdata.dateStart.split("T")[0] : ""}
                 onChange={(even) =>
                   setInputdata({ ...inputdata, dateStart: even.target.value })
@@ -343,12 +343,12 @@ const frmJobdescriptionEdit: FC<userProps> = ({
           </div>
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>เวลาเริ่มงาน</label>
+              <label>กำหนดเวลาเริ่มงาน</label>
               <input
                 type="time"
                 className="form-control"
                 id="timeStart"
-                placeholder="วันเริ่มงาน"
+                placeholder="กำหนดเวลาเริ่มงาน"
                 value={inputdata.timeStart}
                 onChange={(even) =>
                   setInputdata({ ...inputdata, timeStart: even.target.value })
@@ -361,12 +361,12 @@ const frmJobdescriptionEdit: FC<userProps> = ({
         <div className="row">
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>วันเสร็จงาน</label>
+              <label>กำหนดวันส่งงาน</label>
               <input
                 type="date"
                 className="form-control"
                 id="dateStop"
-                placeholder="วันเสร็จงาน"
+                placeholder="วันส่งงาน"
                 value={inputdata.dateStop ? inputdata.dateStop.split("T")[0] : ""}
                 onChange={(even) =>
                   setInputdata({ ...inputdata, dateStop: even.target.value })
@@ -376,7 +376,7 @@ const frmJobdescriptionEdit: FC<userProps> = ({
           </div>
           <div className="col-md-4 col-sm-12">
             <div className="form-group">
-              <label>เวลาเสร็จงาน</label>
+              <label>กำหนดเวลาส่งงาน</label>
               <input
                 type="time"
                 className="form-control"
