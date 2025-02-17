@@ -191,7 +191,15 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
       toast.error("เกิดข้อผิดพลาดในการส่งข้อความ LINE");
     }
   }
-
+  async function getIPAddress() {
+    try {
+      const response = await axios.get("https://api64.ipify.org?format=json");
+      return response.data.ip;
+    } catch (error) {
+      console.error("ไม่สามารถดึง IP Address ได้", error);
+      return "ไม่ทราบ IP";
+    }
+  }
   async function Savedata() {
     if (!inputdata.tReport) {
       toast.error("กรุณาแจ้งเรื่องที่ต้องการแจ้งด้วยครับ!");
@@ -209,6 +217,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
     }
 
     const frmdata = new FormData();
+    const userIP = await getIPAddress();
     frmdata.append("id", inputdata.tID);
     frmdata.append("personnelID", inputdata.tpersonnelID);
     frmdata.append("officeID", inputdata.tofficeID);
@@ -242,7 +251,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
 
         // ✅ ส่งแจ้งเตือน LINE
         await sendLineNotification(
-          `\n📢ใบงานที่: ${inputdata.tID}\n 📋 เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️สถานะ: ${statusText}`
+          `\n📢ใบงานที่: ${inputdata.tID}\n 📋 เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️สถานะ: ${statusText}\n 🌍 IP Address: ${userIP}`
         );
       } else if (response.data == "1") {
         toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
@@ -251,7 +260,7 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
         toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
 
         await sendLineNotification(
-          `\n📢ใบงานที่: ${inputdata.tID}\n 📋 เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️ สถานะ: ${statusText}`
+          `\n📢ใบงานที่: ${inputdata.tID}\n 📋 เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️ สถานะ: ${statusText}\n 🌍 IP Address: ${userIP}`
         );
 
         setTimeout(() => {
@@ -278,7 +287,6 @@ const frmreportaproblemuseredit: FC<userProps> = ({ datadetail }) => {
           <div className="col-md-12 col-sm-12">
             <div className="form-group">
               <label>เรื่องที่แจ้ง</label>
-              <p className="alert-text">!! โปรดระบุ IP เครื่องคอมพิวเตอร์ของคุณลงในเรื่องที่แจ้งเพื่อให้ง่ายต่อการทำงานของเจ้าหน้าที่</p>
               <Autocomplete
                 id="Personlend"
                 freeSolo

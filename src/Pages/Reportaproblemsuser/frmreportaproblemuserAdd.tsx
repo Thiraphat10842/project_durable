@@ -193,6 +193,16 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       toast.error("เกิดข้อผิดพลาดในการส่งข้อความ LINE");
     }
   }
+
+  async function getIPAddress() {
+    try {
+      const response = await axios.get("https://api64.ipify.org?format=json");
+      return response.data.ip;
+    } catch (error) {
+      console.error("ไม่สามารถดึง IP Address ได้", error);
+      return "ไม่ทราบ IP";
+    }
+  }
   
   async function Savedata() {
     if (inputdata.tReport == "") {
@@ -208,6 +218,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
       return false;
     } else {
       const frmdata = new FormData();
+      const userIP = await getIPAddress();
       frmdata.append("id", inputdata.tID);
       frmdata.append("personnelID", inputdata.tPersonnelid);
       frmdata.append("officeID", inputdata.tofficeID);
@@ -239,7 +250,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
   
           // ✅ ส่งแจ้งเตือน LINE
           await sendLineNotification(
-            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️ สถานะ: ${statusText}`
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel} \n ⚠️ สถานะ: ${statusText}\n 🌍 IP Address: ${userIP}`
           );
         } else if (response.data == "1") {
           toast.warning("ระบบตรวจพบว่ามีข้อมูล Username นี้ในระบบแล้วครับ");
@@ -248,7 +259,7 @@ const frmreportaproblemuserAdd: FC<userProps> = ({ datadetail }) => {
           toast.success("ระบบทำการบันทึกแก้ไขข้อมูลเรียบร้อยแล้ว");
   
           await sendLineNotification(
-            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel}\n ⚠️ สถานะ: ${statusText}`
+            `\n📢เรื่องที่แจ้ง: ${inputdata.tReport}\n 🏢 จากหน่วยงาน:${inputdata.tWorkgroup} ${inputdata.tofficeID}\n 📞 เบอร์ติดต่อ:${inputdata.tTel}\n ⚠️ สถานะ: ${statusText}\n 🌍 IP Address: ${userIP}`
           );
   
           setTimeout(() => {
