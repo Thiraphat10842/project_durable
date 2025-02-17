@@ -48,126 +48,88 @@ function frmJobdescriptionITmen() {
 
 
   async function ShowReturnlist() {
-    axios
-      .get(API.returnURL.url + "Jobdescription/Jobdescriptionlist")
-      .then(function (response) {
-        console.log(response.data);
-        let Mydata = response.data;
-        let { rows } = response.data;
-        rows = Mydata.map((row: any, key: number) => ({
-          ...row,
-          Edit: (
-            <div style={{ float: "left" }}>
-              <button
-                className="btn btn-default btn-xs m-2"
-                style={{ cursor: "pointer" }}
-                data-toggle="tooltip"
-                data-original-title="Edit"
-                onClick={() => showModal("edit", row.ID)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#fff"
-                    d="M18.58 2.944a2 2 0 0 0-2.828 0L14.107 4.59l5.303 5.303l1.645-1.644a2 2 0 0 0 0-2.829zm-.584 8.363l-5.303-5.303l-8.835 8.835l-1.076 6.38l6.38-1.077z"
-                  ></path>
-                </svg>{" "}
-                ส่งงาน
-              </button>
-              <button
-                className="btn btn-danger btn-xs m-2"
-                style={{ cursor: "pointer" }}
-                data-toggle="tooltip"
-                data-original-title="Delete"
-                onClick={() => Deletedata(row.ID)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#fff"
-                    d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"
-                  ></path>
-                </svg>{" "}
-                ยกเลิก
-              </button>
-            </div>
-          ),
-        }));
-
-        Mydata = {
-          columns: [
-            // {
-            //   label: "ID",
-            //   field: "ID",
-            //   sort: "asc",
-            //   width: 100,
-            // },
-            {
-              label: "ชื่อผู้แจ้ง",
-              field: "userinFormer",
-              sort: "asc",
-              width: 200,
-            },
-            {
-              label: "หน่วยงาน",
-              field: "Officename",
-              sort: "asc",
-              width: 175,
-            },
-            {
-              label: "เบอร์ติดต่อ",
-              field: "tel",
-              sort: "asc",
-              width: 100,
-            },
-            {
-              label: "Jobdescription",
-              field: "symptom",
-              sort: "asc",
-              width: 150,
-            },
-            {
-              label: "รายละเอียดเพิ่มเติม",
-              field: "Other",
-              sort: "asc",
-              width: 150,
-            },
-            {
-              label: "ผู้รับแจ้ง",
-              field: "fullName1",
-              sort: "asc",
-              width: 200,
-            },
-            
-            {
-              label: "ผู้รับงาน",
-              field: "fullName2",
-              sort: "asc",
-              width: 200,
-            },
-            
-
-            {
-              label: "",
-              field: "Edit",
-              sort: "asc",
-              width: 250,
-            },
-          ],
-          rows,
-        };
-
-        setDatasource(Mydata);
+    try {
+      const response = await axios.get(API.returnURL.url + "Jobdescription/JobdescriptionlistUserID", {
+        params: { userID: sessionStorage.getItem('sessuserID') },
       });
+  
+      console.log("API Response:", response.data); // Debug เพื่อดูข้อมูลจริงๆ ที่ได้มา
+  
+      let rows = response.data; // ถ้า API ส่งกลับมาเป็น Array ให้ใช้ response.data ตรงๆ
+  
+      if (!Array.isArray(rows)) {
+        console.error("Error: Unexpected data format", rows);
+        return;
+      }
+  
+      rows = rows.map((row, key) => ({
+        ...row,
+        Edit: (
+          <div style={{ float: "left" }}>
+            <button
+              className="btn btn-default btn-xs m-2"
+              style={{ cursor: "pointer" }}
+              data-toggle="tooltip"
+              data-original-title="Edit"
+              onClick={() => showModal("edit", row.ID)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={16}
+                height={16}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#fff"
+                  d="M18.58 2.944a2 2 0 0 0-2.828 0L14.107 4.59l5.303 5.303l1.645-1.644a2 2 0 0 0 0-2.829zm-.584 8.363l-5.303-5.303l-8.835 8.835l-1.076 6.38l6.38-1.077z"
+                ></path>
+              </svg>{" "}
+              ส่งงาน
+            </button>
+            <button
+              className="btn btn-danger btn-xs m-2"
+              style={{ cursor: "pointer" }}
+              data-toggle="tooltip"
+              data-original-title="Delete"
+              onClick={() => Deletedata(row.ID)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={16}
+                height={16}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#fff"
+                  d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"
+                ></path>
+              </svg>{" "}
+              ยกเลิก
+            </button>
+          </div>
+        ),
+      }));
+  
+      const Mydata = {
+        columns: [
+          { label: "ชื่อผู้แจ้ง", field: "userinFormer", sort: "asc", width: 200 },
+          { label: "หน่วยงาน", field: "Officename", sort: "asc", width: 175 },
+          { label: "เบอร์ติดต่อ", field: "tel", sort: "asc", width: 100 },
+          { label: "Jobdescription", field: "symptom", sort: "asc", width: 150 },
+          { label: "รายละเอียดเพิ่มเติม", field: "Other", sort: "asc", width: 150 },
+          { label: "ผู้รับแจ้ง", field: "fullName1", sort: "asc", width: 200 },
+          { label: "ผู้รับงาน", field: "fullName2", sort: "asc", width: 200 },
+          { label: "", field: "Edit", sort: "asc", width: 250 },
+        ],
+        rows,
+      };
+  
+      setDatasource(Mydata);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
+  
 
   useEffect(() => {
     ShowReturnlist();
