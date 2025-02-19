@@ -254,7 +254,7 @@ const FrmregisterITmen: FC<userProps> = ({ datadetail, countS }) => {
                             <input type="text" className="form-control" id="tTel" value={inputdata.tTel} onChange={(even) => setInputdata({ ...inputdata, tTel: even.target.value })} />
                         </div>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
         <label>ประเภทผู้ใช้งาน</label>
         <Select
     value={roleOptions.find((obj) => obj.value === inputdata.tStr)}
@@ -262,7 +262,7 @@ const FrmregisterITmen: FC<userProps> = ({ datadetail, countS }) => {
     styles={customStyles}
     onChange={(even: any) => setInputdata({ ...inputdata, tStr: even?.value })}
 />
-    </div>
+    </div> */}
                     <div className="col-md-12 col-sm-12">
                         <div className="form-group">
                             <label htmlFor="tImage" className="custom-file-upload" hidden>รูปภาพ</label>
