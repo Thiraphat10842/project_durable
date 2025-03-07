@@ -52,6 +52,7 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
   const [listoffice, setlistOffice] = useState([]);
   const [listpersonnelit, setlistPersonnelit] = useState([]);
   const [strhidden, setStrhidden] = useState(false);
+  const [listuser, setListuser] = useState([]);
 
   const customStyles = {
     control: (provided: any, state: any) => ({
@@ -128,6 +129,15 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
     };
     data();
   }
+  async function Showuser() {
+    axios.get(API.returnURL.url + "lending/Listuser")
+    .then(function (response) {
+      setListuser(response.data);
+      // console.log(response.data)
+    });
+  }
+
+
 
   useEffect(() => {
     setInputdata({
@@ -163,7 +173,8 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
     ShowlistReturn();
   }, []);
   useEffect(() => {
-    ShowlistReturn();
+    ShowlistReturn(); 
+    Showuser();
     // setReload(!reload)
   }, []);
 
@@ -425,10 +436,10 @@ const frmJobdescriptionITmenAdd: FC<userProps> = ({
             <div className="form-group">
               <label>ผู้รับงาน</label>
               <Select
-                value={listpersonnelit.find(
+                value={listuser.find(
                   (obj: any) => obj.value === inputdata.fullName2
                 )}
-                options={listpersonnelit}
+                options={listuser}
                 styles={customStyles}
                 onChange={(even: any) =>
                   setInputdata({
