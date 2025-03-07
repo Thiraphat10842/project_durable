@@ -317,7 +317,7 @@ import React, {
               <div className="card card-hover">
                 <div className="box bg-info text-center">
                   <h1 className="text-white">{listReturnLend.length}</h1>
-                  <h6 className="text-white">ครุภัณฑ์ที่ยังไม่ได้ส่งคืน</h6>
+                  <h6 className="text-white">จำนวนครุภัณฑ์ที่ยังไม่ส่งคืน</h6>
                 </div>
               </div>
             </div>
@@ -379,7 +379,7 @@ import React, {
                   <div className="d-md-flex align-items-center">
                     <div>
                       <h4 className="card-title">
-                        ตารางแสดงข้อมูลการยืมในแต่ละเดือน
+                      กราฟแสดงข้อมูลจำนวนการยืมครุภัณฑ์ในแต่ละเดือน
                       </h4>                    
                     </div>
                   </div>
