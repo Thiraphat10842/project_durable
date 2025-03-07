@@ -130,7 +130,6 @@ import React, {
       };
       data();
     }
-  
     async function Showlistrepair() {
       const data = async () => {
         const rs = await axios.get(
@@ -150,9 +149,9 @@ import React, {
   
     async function Showlistjobdiscription() {
       const data = async () => {
-        const rs = await axios.get(
-          API.returnURL.url + "Jobdescription/Jobdescriptionlist"
-        );
+        const rs = await axios.get(API.returnURL.url + "Jobdescription/JobdescriptionlistUserID", {
+            params: { userID: sessionStorage.getItem('sessuserID') },
+          });
         if (rs.status === 200) {
           const json = await rs.data;
           setlistjobdiscription(json);

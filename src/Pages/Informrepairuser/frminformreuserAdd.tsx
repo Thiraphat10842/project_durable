@@ -566,7 +566,7 @@ const frminformrepairuserAdd: FC<userProps> = ({
           </div>
           <div className="col-md-4 col-sm-12" hidden={strhidden}>
             <div className="form-group">
-              <label>วันแล้วเสร็จของโปรแกรมเมอร์ เริ่มวันที่</label>
+              <label>กำหนดวันเริ่มของโปรแกรมเมอร์</label>
               <input
       type="date"
       className="form-control"
