@@ -10,7 +10,7 @@ const Frmsidebaradmin: FC = () => {
         <nav className="sidebar-nav">
           <ul id="sidebarnav" className="pt-4">
             <li className="sidebar-item">
-              <a className="sidebar-link waves-effect waves-dark sidebar-link" href="/Admin" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24"><path fill="#f4f4f4" stroke="#f4f4f4" strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.7} d="M20 19v-8.5a1 1 0 0 0-.4-.8l-7-5.25a1 1 0 0 0-1.2 0l-7 5.25a1 1 0 0 0-.4.8V19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1"></path></svg>
+              <a className="sidebar-link waves-effect waves-dark sidebar-link" href="/User" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24"><path fill="#f4f4f4" stroke="#f4f4f4" strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.7} d="M20 19v-8.5a1 1 0 0 0-.4-.8l-7-5.25a1 1 0 0 0-1.2 0l-7 5.25a1 1 0 0 0-.4.8V19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1"></path></svg>
                 <span className="hide-menu">&nbsp;หน้าหลัก</span></a>
             </li>
             <li className="sidebar-item">

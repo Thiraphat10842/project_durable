@@ -340,14 +340,14 @@ import React, {
               </div>
             </div>
   
-            <div className="col-md-6 col-lg-2 col-xlg-3">
+            {/* <div className="col-md-6 col-lg-2 col-xlg-3">
               <div className="card card-hover">
                 <div className="box bg-cyan text-center">
                   <h1 className="text-white">{listjobdiscription.length}</h1>
                   <h6 className="text-white">Jobdiscription</h6>
                 </div>
               </div>
-            </div>
+            </div> */}
   
             <div className="col-md-6 col-lg-2 col-xlg-3">
               <div className="card card-hover">
