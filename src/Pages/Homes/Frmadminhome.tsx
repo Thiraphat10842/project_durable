@@ -1,6 +1,144 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect, Dispatch, SetStateAction } from 'react'
+import axios from 'axios';
+import Select from 'react-select';
+import API from '../../Configs/config';
+import { toast } from 'react-toastify';
 
-const Frmadminhome: FC = () => {
+interface userProps {
+    datadetail: any;
+    countS: any;
+}
+
+function Frmadminhome() {
+
+    const txtinput = { Categoryid: '', Categoryname: '' }
+    const [listuser, setlistuser] = useState([]);
+    const [listOffice, setlistOffice] = useState([]);
+    const [Lend, setLend] = useState([]);
+    const [ReturnLend, setReturneLend] = useState([]);
+    // const [listcomputer, setlistcomputer] = useState([]);
+      const [inputdata, setInputdata] = useState(txtinput);
+      const [datasource, setDatasource] = useState([] as any);
+      const [listinformrepair, setinformrepair] = useState([] as any);
+      const [listrepair, setlistrepair] = useState([] as any);
+      const [listjobdiscription, setlistjobdiscription] = useState([] as any);
+
+
+        useEffect(() => {
+            showlistuser();
+            showOffice();
+            ShowlistReturn();
+        }, [])
+
+        useEffect(() => {
+
+            showcomputer();
+            ShowlistLend();
+            Showlistinformrepair();
+            Showlistrepair();
+            Showlistjobdiscription();
+    
+        }, [inputdata.Categoryid])
+
+        async function showlistuser() {
+
+            axios.get(API.returnURL.url + "Personnel")
+                .then(function (response) {
+    
+                    setlistuser(response.data);
+    
+                });
+        }
+        async function showOffice() {
+
+            axios.get(API.returnURL.url + "Office")
+                .then(function (response) {
+    
+                    setlistOffice(response.data);
+    
+                });
+        }
+        
+        async function showcomputer() {
+
+            axios.get(API.returnURL.url + "Computers/showcomputer?categoryID=" + inputdata.Categoryid)
+                .then(function (response) {
+                    let Mydata = response.data;
+                    setDatasource(Mydata);
+    
+                });
+        }
+
+        async function ShowlistReturn() {
+            const data = async () => {
+                const rs = await axios.get(API.returnURL.url + "Lending/Returndurable")
+                if (rs.status === 200) {
+                    const json = await rs.data
+                    setLend(json)
+                }
+            }
+            data()
+        }
+
+        async function ShowlistLend() {
+            const data = async () => {
+                const rs = await axios.get(
+                    API.returnURL.url +
+                      "Lending?userID=" +
+                      sessionStorage.getItem("sessID") +
+                      "&str=" +
+                      sessionStorage.getItem("sessStr")
+                  )
+                if (rs.status === 200) {
+                    const json = await rs.data
+                    setReturneLend(json)
+                }
+            }
+            data()
+        }
+
+        
+        async function Showlistinformrepair() {
+            const data = async () => {
+                const rs = await axios.get(
+                    API.returnURL.url +
+                      "Informrepair?userStr=" +
+                      sessionStorage.getItem("sessStr") +
+                      "&userID=" +
+                      sessionStorage.getItem("sessuserID")
+                  )
+                if (rs.status === 200) {
+                    const json = await rs.data
+                    setinformrepair(json)
+                }
+            }
+            data()
+        }
+
+
+        async function Showlistrepair() {
+            const data = async () => {
+                const rs = await axios.get(API.returnURL.url + "Reportproblem?userID=" + sessionStorage.getItem('sessuserID') + "&str=" + sessionStorage.getItem('sessStr'))
+                if (rs.status === 200) {
+                    const json = await rs.data
+                    setlistrepair(json)
+                }
+            }
+            data()
+        }
+
+        
+        async function Showlistjobdiscription() {
+            const data = async () => {
+                const rs = await axios.get(API.returnURL.url + "Jobdescription/Jobdescriptionlist")
+                if (rs.status === 200) {
+                    const json = await rs.data
+                    setlistjobdiscription(json)
+                }
+            }
+            data()
+        }
+        
     return (
         <div>
             <div className="page-breadcrumb">
@@ -27,10 +165,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-cyan text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-view-dashboard" />
-                                </h1>
-                                <h6 className="text-white">Dashboard</h6>
+                                <h1 className="text-white">{listuser.length}</h1>
+                                <h6 className="text-white">ผู้ใช้งาน</h6>
                             </div>
                         </div>
                     </div>
@@ -38,10 +174,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-4 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-success text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-chart-areaspline" />
-                                </h1>
-                                <h6 className="text-white">Charts</h6>
+                                <h1 className="text-white">{listOffice.length}</h1>
+                                <h6 className="text-white">หน่วยงานทั้งหมด</h6>
                             </div>
                         </div>
                     </div>
@@ -49,10 +183,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-warning text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-collage" />
-                                </h1>
-                                <h6 className="text-white">Widgets</h6>
+                                <h1 className="text-white">{datasource.length}</h1>
+                                <h6 className="text-white">ทะเบียนครุภัณฑ์</h6>
                             </div>
                         </div>
                     </div>
@@ -60,10 +192,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-danger text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-border-outside" />
-                                </h1>
-                                <h6 className="text-white">Tables</h6>
+                                <h1 className="text-white">{Lend.length}</h1>
+                                <h6 className="text-white">จำนวนการยืมครุภัณฑ์</h6>
                             </div>
                         </div>
                     </div>
@@ -71,10 +201,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-info text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-arrow-all" />
-                                </h1>
-                                <h6 className="text-white">Full Width</h6>
+                            <h1 className="text-white">{ReturnLend.length}</h1>
+                                <h6 className="text-white">ครุภัณฑ์ที่ยังไม่ได้ส่งคืน</h6>
                             </div>
                         </div>
                     </div>
@@ -83,10 +211,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-4 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-danger text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-receipt" />
-                                </h1>
-                                <h6 className="text-white">Forms</h6>
+                            <h1 className="text-white">{listinformrepair.length}</h1>
+                                <h6 className="text-white">รายการการขอโปรแกรมรายงาน</h6>
                             </div>
                         </div>
                     </div>
@@ -94,10 +220,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-info text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-relative-scale" />
-                                </h1>
-                                <h6 className="text-white">Buttons</h6>
+                            <h1 className="text-white">{listrepair.length}</h1>
+                                <h6 className="text-white">รายการแจ้งปัญหา</h6>
                             </div>
                         </div>
                     </div>
@@ -105,10 +229,8 @@ const Frmadminhome: FC = () => {
                     <div className="col-md-6 col-lg-2 col-xlg-3">
                         <div className="card card-hover">
                             <div className="box bg-cyan text-center">
-                                <h1 className="font-light text-white">
-                                    <i className="mdi mdi-pencil" />
-                                </h1>
-                                <h6 className="text-white">Elements</h6>
+                            <h1 className="text-white">{listjobdiscription.length}</h1>
+                                <h6 className="text-white">Jobdiscription</h6>
                             </div>
                         </div>
                     </div>
