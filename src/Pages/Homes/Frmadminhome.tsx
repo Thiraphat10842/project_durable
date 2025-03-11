@@ -226,9 +226,9 @@ import React, {
         {
           label: "จำนวนการยืมในแต่ละเดือน",
           data: monthlyLendData.map((data) => data.count),
-          backgroundColor: "#54a3bc",  // สีแท่งกราฟ
-          borderColor: "#54a3bc",// สีกรอบแท่งกราฟ
-          borderWidth: 2,
+          backgroundColor: "#598BAF",  // สีแท่งกราฟ
+          borderColor: "#598BAF",// สีกรอบแท่งกราฟ
+          borderWidth: 1,
         },
       ],
     };
