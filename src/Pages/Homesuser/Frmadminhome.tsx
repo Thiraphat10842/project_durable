@@ -97,7 +97,7 @@ function Frmadminhome() {
 
   async function ShowlistReturn() {
     const data = async () => {
-      const rs = await axios   .get(
+      const rs = await axios.get(
         API.returnURL.url +
           "Lending/Returndurable?userID=" +
           sessionStorage.getItem("sessID") +
