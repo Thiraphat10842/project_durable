@@ -1,0 +1,32 @@
+/* คลาสสำหรับสถานะต่างๆ */
+.status-report {
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
+/* คลาสสำหรับสถานะต่างๆ */
+.status-report {
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* สถานะ แจ้งปัญหา */
+.status-report.problem {
+  color: #e74c3c; /* สีแดง */
+}
+
+/* สถานะ รับแจ้ง */
+.status-report.received {
+  color: #3498db; /* สีน้ำเงิน */
+}
+
+/* สถานะ สั่งงาน */
+.status-report.assigned {
+  color: #f39c12; /* สีส้ม */
+}
+/* สถานะ แล้วเสร็จ */
+.status-report.completed {
+  color: #2ecc71; /* สีเทา */
+}
