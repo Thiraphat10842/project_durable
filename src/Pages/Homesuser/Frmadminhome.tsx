@@ -232,27 +232,7 @@ import React, {
         },
       ],
     };
-  
-    // กำหนด options ให้แสดงปี พ.ศ. ที่หัวกราฟ
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: `จำนวนการยืมปี ${new Date().getFullYear() + 543}`, // ปี พ.ศ.
-          font: {
-            size: 18,
-            weight: "bold",
-          },
-          padding: {
-            top: 20,
-            bottom: 20,
-          },
-        },
-      },
-    };
-  
+
     return (
       <div>
         <div className="page-breadcrumb">
