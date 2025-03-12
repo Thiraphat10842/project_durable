@@ -34,6 +34,8 @@ import HomeITmen from './HomesITmen/Frmadminhome';
 import ITmenLayout from '../Components/LayoutsuserITmen/userLayout';
 import JobdescriptionITmen from './ITmen/JobdescriptionITmen/frmJobdescriptionITmen';
 import Homeuser from './Homesuser/Frmadminhome';
+import Dleuser from './ComputersUser/Frmdurableuser';
+
 
 const Main: FC = () => {
   return (
@@ -57,6 +59,7 @@ const Main: FC = () => {
         </Route>
         <Route path="/User" element={<UserLayout />}>
           <Route path="/User" element={<Homeuser/>} />
+          <Route path="/User/Computeruser" element={<Dleuser/>} />
           {/* <Route path="/User/Informrepair" element={''} /> */}
           <Route path="/User/Informrepairuser" element={<Informrepairuser/>} />
           <Route path="/User/Reportaproblemuser" element={<Reportaproblemuser/>} />

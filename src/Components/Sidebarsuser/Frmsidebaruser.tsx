@@ -36,7 +36,7 @@ const Frmsidebaradmin: FC = () => {
                 </li>
               </ul> */}
             {/* </li> */}
-            {/* <li className="sidebar-item">
+            <li className="sidebar-item">
               <a className="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 16 16">
                 <path fill="#fffcfc" d="M3.5 2a.5.5 0 0 0-.5.5V13H2v1h6v-1.5H4V3h8v1h1V2.5a.5.5 0 0 0-.5-.5z"></path>
                 <path fill="#fffcfc" fillRule="evenodd" d="M9.5 5a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5zm1.5 7.5h1v-1h-1z" clipRule="evenodd"></path>
@@ -44,11 +44,11 @@ const Frmsidebaradmin: FC = () => {
                 <span className="hide-menu"> &nbsp; ครุภัณฑ์คอมพิวเตอร์ </span></a>
               <ul aria-expanded="false" className="collapse first-level">
                 <li className="sidebar-item">
-                  <a href="/Admin/Computer" className="sidebar-link">
+                  <a href="/User/Computeruser" className="sidebar-link">
                     <span className="hide-menu"> &nbsp; - ทะเบียนครุภัณฑ์ </span></a>
                 </li>
               </ul>
-            </li> */}
+            </li>
             <li className="sidebar-item">
               <a className="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
                 <path fill="#fffcfc" d="M2 2h5.077A3.926 3.926 0 0 1 11 5.923V11H5.923A3.926 3.926 0 0 1 2 7.077zm11 3.923A3.926 3.926 0 0 1 16.923 2H22v5.077A3.926 3.926 0 0 1 18.077 11H13zm-11 11A3.926 3.926 0 0 1 5.923 13H11v5.077A3.926 3.926 0 0 1 7.077 22H2zM13 13h5.077A3.926 3.926 0 0 1 22 16.923V22h-5.077A3.926 3.926 0 0 1 13 18.077z"></path>
