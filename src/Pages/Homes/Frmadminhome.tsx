@@ -86,7 +86,7 @@ function Frmadminhome() {
     // ฟังก์ชันที่รีเซ็ตตัวจับเวลาเมื่อมีการทำกิจกรรม
     const resetTimeout = () => {
       clearTimeout(timeout); // ลบ timeout เดิม
-      timeout = setTimeout(reloadPage, 20000); // รีโหลดหน้าจอหลังจาก 20 วินาทีไม่มีการทำกิจกรรม
+      timeout = setTimeout(reloadPage, 30000); // รีโหลดหน้าจอหลังจาก 20 วินาทีไม่มีการทำกิจกรรม
     };
 
     // ตั้ง listener เพื่อตรวจจับการเคลื่อนไหวของเมาส์และการกดแป้นพิมพ์
@@ -104,7 +104,7 @@ function Frmadminhome() {
     };
   }, []);
 
-  
+
   async function showlistuser() {
     axios.get(API.returnURL.url + "Personnel").then(function (response) {
       setlistuser(response.data);
