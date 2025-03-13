@@ -18,15 +18,14 @@ const reload = () => {
     
         // ฟังก์ชันที่รีเซ็ตตัวจับเวลาเมื่อมีการทำกิจกรรม
         const resetTimeout = () => {
-          clearTimeout(timeout); // ลบ timeout เดิม
-          timeout = setTimeout(reloadPage, 30000); // รีโหลดหน้าจอหลังจาก 20 วินาทีไม่มีการทำกิจกรรม
+          clearTimeout(timeout); 
+          timeout = setTimeout(reloadPage, 20000); 
         };
     
         // ตั้ง listener เพื่อตรวจจับการเคลื่อนไหวของเมาส์และการกดแป้นพิมพ์
         document.addEventListener("mousemove", resetTimeout);
         document.addEventListener("keydown", resetTimeout);
     
-        // เริ่มต้นการนับเวลา
         resetTimeout();
     
         // ลบ event listeners เมื่อ component ถูก unmount
