@@ -13,10 +13,19 @@ interface Noti {
   reportDate: string;
 }
 
+interface Notification {
+  Officename: string;
+  Reportproblem: string;
+  type: string;
+}
+
+
 const Frmheaderitmen: FC = () => {
   const navigate = useNavigate();
   const [noti, setNoti] = useState<Noti[]>([]);
   const [datasource, setDatasource] = useState([] as any);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
 
   useEffect(() => {
     Showdatauser();
@@ -91,6 +100,35 @@ const Frmheaderitmen: FC = () => {
   useEffect(() => {
     Notimessage();
   }, []);
+
+  useEffect(() => {
+    fetchNotifications();
+}, []);
+
+async function fetchNotifications() {
+  try {
+      const response = await axios.get(
+          API.returnURL.url +
+              "Reportproblem?userID=" +
+              sessionStorage.getItem("sessuserID") +
+              "&str=" +
+              sessionStorage.getItem("sessStr")
+      );
+
+      let Mydata: Notification[] = response.data;
+
+      // ✅ ใช้ Interface กับ filter() เพื่อให้ TypeScript ไม่แจ้งเตือน
+      const newNotifications = Mydata.filter(
+          (row: Notification) => row.Reportproblem === "แจ้งปัญหา" && row.type === "0"
+      );
+
+      setNotifications(newNotifications);
+      setUnreadCount(newNotifications.length);
+  } catch (error) {
+      console.error("Error fetching notifications:", error);
+  }
+}
+
 
   return (
     <header className="topbar" data-navbarbg="skin5">
@@ -182,36 +220,39 @@ const Frmheaderitmen: FC = () => {
               {sessionStorage.getItem("sessName")}
             </span>
             <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
+            <a
+                className="nav-link dropdown-toggle position-relative"
                 href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-              >
+            >
                 <i className="mdi mdi-bell font-24" />
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
+                {unreadCount > 0 && (
+                    <span
+                        className="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger"
+                        style={{ fontSize: "15px", padding: "5px" }}
+                    >
+                        {unreadCount}
+                    </span>
+                )}
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {notifications.length > 0 ? (
+                    notifications.map((notification, index) => (
+                        <li key={index}>
+                            <a className="dropdown-item fs-20" href="/Admin/Reportaproblem">
+                                {notification.Officename} แจ้งปัญหา 
+                            </a>
+                        </li>
+                    ))
+                ) : (
+                    <li>
+                        <a className="dropdown-item text-muted">ไม่มีการแจ้งเตือน</a>
+                    </li>
+                )}
+            </ul>
             </li>
             <li className="nav-item dropdown">
               <a

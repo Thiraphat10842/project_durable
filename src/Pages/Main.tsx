@@ -20,6 +20,7 @@ import Reportaproblemuser from './Reportaproblemsuser/frmreportaproblemuser';
 import Lendinguser from './Lendingsuser/Frmlendinguser';
 import Returnequipmentuser from './Returnequipmentsuser/frmreturnequipmentuser';
 import FrmProfile from './profile/FrmProfile';
+import Reload from '../Components/Reloadhome/reload';
 
 /* ITmen  */
 import DurableITmen from './ITmen/Computers/FrmdurableITmen';
@@ -55,6 +56,8 @@ const Main: FC = () => {
           <Route path="/Admin/Workload" element={<Workload />} />
           <Route path="/Admin/Jobdescription" element={<Jobdescription/>} />
           <Route path="/Admin/FrmProfile" element={<FrmProfile/>} />
+          <Route path="/Admin/Reload" element={<Reload/>} />
+
           
         </Route>
         <Route path="/User" element={<UserLayout />}>

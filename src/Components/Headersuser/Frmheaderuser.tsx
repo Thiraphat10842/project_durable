@@ -12,11 +12,21 @@ interface Noti {
   report: string;
   reportDate: string;
 }
+// ✅ กำหนด Type ของข้อมูลแจ้งเตือน
+interface Notification {
+  ID: string;
+  Officename: string;
+  Reportproblem: string;
+  report: string;
+  type: string;
+}
 
 const Frmheaderuser: FC = () => {
   const navigate = useNavigate();
   const [noti, setNoti] = useState<Noti[]>([]);
   const [datasource, setDatasource] = useState([] as any);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
 
   useEffect(() => {
     Showdatauser();
@@ -91,6 +101,63 @@ const Frmheaderuser: FC = () => {
   useEffect(() => {
     Notimessage();
   }, []);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  async function fetchNotifications() { 
+    try {
+        const response = await axios.get(
+            API.returnURL.url +
+                "Reportproblem?userID=" +
+                sessionStorage.getItem("sessuserID") +
+                "&str=" +
+                sessionStorage.getItem("sessStr")
+        );
+  
+        let Mydata: Notification[] = response.data;
+  
+        // ตรวจสอบข้อมูลที่ได้รับจาก API
+        console.log('Fetched notifications:', Mydata);
+  
+        // ✅ ใช้ filter() คัดเฉพาะแจ้งเตือนที่มีสถานะ "แล้วเสร็จ" และ type เป็น "0"
+        const newNotifications = Mydata.filter(
+            (row: Notification) => row.Reportproblem === "แล้วเสร็จ" && row.type === "0"
+        );
+  
+        // ตรวจสอบการแจ้งเตือนที่ถูกลบและไม่ให้แสดง
+        const removedNotifications = JSON.parse(localStorage.getItem("removedNotifications") || "[]");
+  
+        // ลบการแจ้งเตือนที่ถูกเก็บใน localStorage ออก
+        const filteredNotifications = newNotifications.filter(
+            (notification) => !removedNotifications.some((removed: Notification) => removed.ID === notification.ID)
+        );
+  
+        console.log('Filtered notifications:', filteredNotifications);
+  
+        setNotifications(filteredNotifications);  // กำหนดค่า notifications ที่กรองแล้ว
+        setUnreadCount(filteredNotifications.length);  // อัปเดตจำนวนการแจ้งเตือนที่ยังไม่ได้อ่าน
+    } catch (error) {
+        console.error("Error fetching notifications:", error);
+    }
+  }
+  
+
+  const markAsRead = (index: number) => {
+    setNotifications((prev) => {
+        const updatedNotifications = prev.filter((_, i) => i !== index); // ลบการแจ้งเตือนที่คลิก
+        setUnreadCount(updatedNotifications.length); // อัปเดตจำนวนแจ้งเตือนที่ยังไม่ได้อ่าน
+
+        // เก็บการแจ้งเตือนที่ถูกลบไว้ใน localStorage
+        const removedNotification = prev[index];
+        let removedNotifications = JSON.parse(localStorage.getItem("removedNotifications") || "[]");
+        removedNotifications.push(removedNotification);
+        localStorage.setItem("removedNotifications", JSON.stringify(removedNotifications)); // บันทึกลงใน localStorage
+
+        return updatedNotifications;
+    });
+};
 
   return (
     <header className="topbar" data-navbarbg="skin5">
@@ -182,37 +249,43 @@ const Frmheaderuser: FC = () => {
               {sessionStorage.getItem("sessName")}
             </span>
             <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="mdi mdi-bell font-24" />
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+  <a
+    className="nav-link dropdown-toggle"
+    href="#"
+    id="navbarDropdown"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i className="mdi mdi-bell font-24" />
+    {unreadCount > 0 && (
+      <span className="badge bg-danger">{unreadCount}</span>  
+    )}
+  </a>
+  <ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+    {notifications.length > 0 ? (
+      notifications.map((notification, index) => (
+        <li key={index}>
+          <a
+            className="dropdown-item fs-6"
+            href="/User/Reportaproblemuser"
+            onClick={(e) => {
+              e.preventDefault();  // ป้องกันการ redirect ไปที่หน้าอื่น
+              markAsRead(index);  // ลบการแจ้งเตือนเมื่อคลิก
+            }}
+          >
+            {notification.report} ดำเนินการเสร็จแล้ว
+          </a>
+        </li>
+      ))
+    ) : (
+      <li>
+        <a className="dropdown-item text-muted">ไม่มีการแจ้งเตือน</a>
+      </li>
+    )}
+  </ul>
+</li>
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle waves-effect waves-dark"

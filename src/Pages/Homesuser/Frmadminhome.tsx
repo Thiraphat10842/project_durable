@@ -19,6 +19,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import Reload from "../../Components/Reloadhome/reload";
 
 // ลงทะเบียน Chart.js components
 ChartJS.register(
@@ -71,34 +72,7 @@ function Frmadminhome() {
     Showlistreport();
   }, [inputdata.Categoryid]);
 
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-
-    // ฟังก์ชันที่ใช้รีโหลดหน้าจอ
-    const reloadPage = () => {
-      window.location.reload();
-    };
-
-    // ฟังก์ชันที่รีเซ็ตตัวจับเวลาเมื่อมีการทำกิจกรรม
-    const resetTimeout = () => {
-      clearTimeout(timeout); // ลบ timeout เดิม
-      timeout = setTimeout(reloadPage, 30000); // รีโหลดหน้าจอหลังจาก 20 วินาทีไม่มีการทำกิจกรรม
-    };
-
-    // ตั้ง listener เพื่อตรวจจับการเคลื่อนไหวของเมาส์และการกดแป้นพิมพ์
-    document.addEventListener("mousemove", resetTimeout);
-    document.addEventListener("keydown", resetTimeout);
-
-    // เริ่มต้นการนับเวลา
-    resetTimeout();
-
-    // ลบ event listeners เมื่อ component ถูก unmount
-    return () => {
-      clearTimeout(timeout);
-      document.removeEventListener("mousemove", resetTimeout);
-      document.removeEventListener("keydown", resetTimeout);
-    };
-  }, []);
+  <Reload />
 
   async function showlistuser() {
     axios.get(API.returnURL.url + "Personnel").then(function (response) {
@@ -291,9 +265,10 @@ function Frmadminhome() {
       },
     ],
   };
-
   return (
+    
     <div>
+       <Reload />
       <div className="page-breadcrumb">
         <div className="row">
           <div className="col-12 d-flex no-block align-items-center">
