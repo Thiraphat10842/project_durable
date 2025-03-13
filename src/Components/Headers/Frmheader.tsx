@@ -121,7 +121,7 @@ const Frmheader: FC = () => {
                 <i className="mdi mdi-menu font-24" />
               </a>
             </li>
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -157,13 +157,13 @@ const Frmheader: FC = () => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li className="nav-item search-box">
               <a
                 className="nav-link waves-effect waves-dark"
                 href="javascript:void(0)"
               >
-                <i className="mdi mdi-magnify fs-2" />
+                {/* <i className="mdi mdi-magnify fs-2" /> */}
               </a>
               <form className="app-search position-absolute">
                 <input
