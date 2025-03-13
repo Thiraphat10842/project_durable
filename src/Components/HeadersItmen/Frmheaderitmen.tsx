@@ -221,7 +221,7 @@ async function fetchNotifications() {
             </span>
             <li className="nav-item dropdown">
             <a
-                className="nav-link dropdown-toggle position-relative"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -238,11 +238,11 @@ async function fetchNotifications() {
                     </span>
                 )}
             </a>
-            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul className="dropdown-menu dropdown-menu-start">
                 {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
                         <li key={index}>
-                            <a className="dropdown-item fs-20" href="/Admin/Reportaproblem">
+                            <a className="dropdown-item fs-6" href="/Admin/Reportaproblem">
                                 {notification.Officename} แจ้งปัญหา 
                             </a>
                         </li>
