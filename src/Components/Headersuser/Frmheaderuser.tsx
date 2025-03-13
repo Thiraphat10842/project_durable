@@ -283,7 +283,7 @@ const Frmheaderuser: FC = () => {
                         className="dropdown-item fs-6"
                         href="/User/Reportaproblemuser"
                         onClick={(e) => {
-                          e.preventDefault(); // ป้องกันการ redirect ไปที่หน้าอื่น
+                          // e.preventDefault(); // ป้องกันการ redirect ไปที่หน้าอื่น
                           markAsRead(index); // ลบการแจ้งเตือนเมื่อคลิก
                         }}
                       >
