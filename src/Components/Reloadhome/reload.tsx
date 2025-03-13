@@ -19,7 +19,7 @@ const reload = () => {
         // ฟังก์ชันที่รีเซ็ตตัวจับเวลาเมื่อมีการทำกิจกรรม
         const resetTimeout = () => {
           clearTimeout(timeout); 
-          timeout = setTimeout(reloadPage, 20000); 
+          timeout = setTimeout(reloadPage, 30000); 
         };
     
         // ตั้ง listener เพื่อตรวจจับการเคลื่อนไหวของเมาส์และการกดแป้นพิมพ์
