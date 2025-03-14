@@ -27,6 +27,7 @@
     "ip": "^2.0.1",
     "jspdf": "^2.5.1",
     "local-ip-address": "^1.0.0",
+    "lucide-react": "^0.479.0",
     "mdbreact": "^5.2.0",
     "node-polyfill-webpack-plugin": "^4.0.0",
     "primereact": "^10.7.0",
